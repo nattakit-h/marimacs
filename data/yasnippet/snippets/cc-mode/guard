@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: guard
+# key: #guard
+# --
+#ifndef ${1:`(mari:string-c-header-guard)`}
+#define $1
+
+$0
+
+#endif // $1
