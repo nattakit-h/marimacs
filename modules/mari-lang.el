@@ -29,7 +29,15 @@
   (clang-format+-always-enable t)
   :hook ((c-mode c++-mode) . clang-format+-mode))
 
+(use-package tsc
+  :straight (tsc
+             :type git
+             :host github
+             :repo "ubolonton/emacs-tree-sitter"
+             :files ("core/*.el")))
+
 (use-package tree-sitter
+  :after tsc
   :straight (tree-sitter
              :type git
              :host github
