@@ -71,6 +71,31 @@
   (add-to-list 'auto-mode-alist '(".clang-format\\'" . yaml-mode))
   (add-to-list 'auto-mode-alist '(".clang-tidy\\'" . yaml-mode)))
 
+
+(use-package org
+  :straight nil
+  :custom
+  (org-hide-emphasis-markers t)
+  (org-fontify-done-headline t)
+  (org-hide-leading-stars t)
+  (org-pretty-entities t)
+  (org-odd-levels-only t)
+  (org-startup-indented t)
+  (org-src-tab-acts-natively t)
+  (prettify-symbols-unprettify-at-point 'right-edge)
+  (prettify-symbols-alist (append
+                           '(("#+BEGIN_SRC" . "⇀")
+                             ("#+END_SRC" . "↽"))
+                           prettify-symbols-alist))
+  :hook
+  (org-mode . prettify-symbols-mode))
+
+(use-package org-bullets
+  :custom
+  (org-ellipsis "⌄")
+  :hook (org-mode . org-bullets-mode))
+
+
 (provide 'mari-lang)
 
 ;;; mari-lang.el ends here
