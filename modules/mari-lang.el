@@ -57,7 +57,7 @@
 
 (use-package ccls
   :custom
-  (ccls-sem-highlight-method 'font-lock)
+  (ccls-sem-highlight-method 'overlay)
   (ccls-initialization-options
    '(:index (:comments 2 :onChange t) :completion
             (:detailedLabel t) :cache (:directory ""))))
