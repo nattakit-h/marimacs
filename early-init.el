@@ -26,13 +26,19 @@
 
 ;; Set standard paths
 (defconst mari:modules-directory
-  (concat user-emacs-directory "modules"))
+  (file-name-as-directory (concat user-emacs-directory "modules")))
 
 (defconst mari:runtime-directory
-  (concat user-emacs-directory "runtime"))
+  (file-name-as-directory (concat user-emacs-directory "runtime")))
 
 (defconst mari:data-directory
-  (concat user-emacs-directory "data"))
+  (file-name-as-directory (concat user-emacs-directory "data")))
+
+;; Set eln cache directory
+(when (featurep 'nativecomp)
+  (setq comp-eln-load-path
+        (cons (file-name-as-directory (concat mari:runtime-directory "eln"))
+              (remq (car comp-eln-load-path) comp-eln-load-path))))
 
 ;; Increase gc threshold for lsp-mode
 (setq gc-cons-threshold 100000000)
