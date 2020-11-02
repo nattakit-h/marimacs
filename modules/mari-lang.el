@@ -71,7 +71,6 @@
   (add-to-list 'auto-mode-alist '(".clang-format\\'" . yaml-mode))
   (add-to-list 'auto-mode-alist '(".clang-tidy\\'" . yaml-mode)))
 
-
 (use-package org
   :straight nil
   :custom
@@ -92,9 +91,8 @@
 
 (use-package org-bullets
   :custom
-  (org-ellipsis "⌄")
+  (org-ellipsis "*")
   :hook (org-mode . org-bullets-mode))
-
 
 (provide 'mari-lang)
 
