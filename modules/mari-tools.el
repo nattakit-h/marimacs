@@ -34,6 +34,8 @@
   (shell-pop-window-position "buttom")
   (shell-pop-window-size 20))
 
+(use-package elfeed)
+
 (provide 'mari-tools)
 
 ;;; mari-tools.el ends here
