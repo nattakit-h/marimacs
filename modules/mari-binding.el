@@ -26,7 +26,9 @@
 
 (use-package ace-window)
 
-(use-package windresize)
+(use-package windresize
+  :config
+  (define-key evil-normal-state-map (kbd "C-x r") 'mari:menu-window-resize/body))
 
 (use-package hydra
   :config
