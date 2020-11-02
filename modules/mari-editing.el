@@ -31,9 +31,10 @@
 (electric-pair-mode t)
 
 (use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
+  :custom
+  (evil-want-integration t)
+  (evil-want-keybinding nil)
+  (evil-want-C-u-scroll t)
   :hook
   (after-init . (lambda () (evil-mode 1))))
 
