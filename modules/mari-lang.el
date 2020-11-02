@@ -92,7 +92,34 @@
 (use-package org-bullets
   :custom
   (org-ellipsis "*")
-  :hook (org-mode . org-bullets-mode))
+  :hook
+  (org-mode . org-bullets-mode))
+
+(defun mari:slime-fasl-directory ()
+  "Return fasl path."
+  (file-name-as-directory
+   (concat mari:runtime-directory "slime/fasl/" slime-version)))
+
+(defun mari:slime-init-command (_port-filename _coding-system)
+  "Return a string to initialize Lisp."
+  (let ((loader (if (file-name-absolute-p slime-backend)
+                    slime-backend
+                  (concat slime-path slime-backend))))
+    (format "%S\n\n"
+            `(progn
+               (load ,(slime-to-lisp-filename (expand-file-name loader)) :verbose t)
+               (set (read-from-string "swank-loader:*fasl-directory*")
+                    ,(mari:slime-fasl-directory))
+               (funcall (read-from-string "swank-loader:init") :from-emacs t)
+               (funcall (read-from-string "swank:start-server")
+                        ,(slime-to-lisp-filename _port-filename))))))
+
+(use-package slime
+  :custom
+  (inferior-lisp-program "ecl")
+  (slime-repl-history-file (concat mari:runtime-directory "slime/slime-history.eld"))
+  :config
+  (advice-add 'slime-init-command :override #'mari:slime-init-command))
 
 (provide 'mari-lang)
 
