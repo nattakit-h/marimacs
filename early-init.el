@@ -86,4 +86,8 @@
 ;; Add load path
 (add-to-list 'load-path mari:modules-directory)
 
+;; Set default browser
+(setq w3m-use-tab nil)
+(setq browse-url-handlers '(("." . w3m-browse-url)))
+
 ;;; early-init.el ends here
