@@ -24,11 +24,11 @@
 
 ;;; Code:
 
-(setq electric-pair-pairs '((?\{ . ?\})
-                            (?\( . ?\))
-                            (?\[ . ?\])
-                            (?\" . ?\")))
-(electric-pair-mode t)
+(use-package smartparens
+  :config
+  (require 'smartparens-config)
+  :hook
+  (prog-mode . smartparens-strict-mode))
 
 (use-package evil
   :custom
@@ -37,6 +37,15 @@
   (evil-want-C-u-scroll t)
   :hook
   (after-init . (lambda () (evil-mode 1))))
+
+(use-package evil-surround
+ :config
+ (global-evil-surround-mode 1))
+
+(use-package evil-smartparens
+  :after evil smartparens
+  :hook
+  (smartparens-strict-mode . evil-smartparens-mode))
 
 (use-package evil-collection
   :after evil
