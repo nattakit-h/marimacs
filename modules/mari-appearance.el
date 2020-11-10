@@ -67,7 +67,7 @@
   (set-face-foreground 'rainbow-delimiters-depth-5-face
                        (face-foreground 'all-the-icons-red))
   :hook
-  ((emacs-lisp-mode racket-mode) . rainbow-delimiters-mode))
+  ((lisp-mode emacs-lisp-mode scheme-mode racket-mode) . rainbow-delimiters-mode))
 
 ;; Doom themes
 (use-package doom-themes
