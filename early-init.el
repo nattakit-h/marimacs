@@ -90,4 +90,7 @@
 (setq w3m-use-tab nil)
 (setq browse-url-handlers '(("." . w3m-browse-url)))
 
+;; Kill all remaining processes when emacs exited
+(setq confirm-kill-processes nil)
+
 ;;; early-init.el ends here

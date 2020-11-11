@@ -120,6 +120,27 @@
     (bufffer (when bufffer (with-current-buffer bufffer
                              (comint-kill-region (point-min) (point-max)))))))
 
+(defun mari:get-xdg-data-home ()
+  "Get user XDG data home directory."
+  (file-name-as-directory
+   (or (getenv "XDG_DATA_HOME")
+       (concat (file-name-as-directory (getenv "HOME")) ".local/share"))))
+
+(defun mari:eql-start-swank ()
+  "Start swank with eql5."
+  (interactive)
+  (unless (get-process "eql-swank")
+    (start-process "eql-swank" "*eql-swank*" "eql5"
+                   (concat user-emacs-directory "straight/repos/slime/eql-start-swank.lisp"))))
+
+(defun mari:eql-slime ()
+  "Start and connect to swank with eql5."
+  (interactive)
+  (mari:eql-start-swank)
+  (slime-disconnect-all)
+  (with-timeout (1 (message "Unable to connect to eql-swank process"))
+    (while (not (slime-connected-p))
+      (ignore-errors (slime-connect "localhost" 4005 nil nil)))))
 
 (provide 'mari-func)
 
