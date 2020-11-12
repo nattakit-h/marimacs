@@ -24,61 +24,21 @@
 
 ;;; Code:
 
-(use-package ace-window)
+(defmacro mari:defkey (key func)
+  "Bind KEY to FUNC for evil normal map."
+  `(define-key evil-normal-state-map (kbd ,key) ,func))
 
-(use-package windresize
-  :config
-  (define-key evil-normal-state-map (kbd "C-x r") 'mari:menu-window-resize/body))
+(defmacro mari:com (args &rest body)
+  "Alias for interactive command with ARGS and BODY."
+  `(lambda ,args
+     (interactive)
+     ,@body))
 
-(use-package hydra
-  :config
-  (defhydra mari:menu-index (:color blue)
-    "index"
-    ("f" mari:menu-file/body "file")
-    ("w" mari:menu-window/body "window")
-    ("p" mari:menu-project/body "project")
-    ("t" mari:menu-tools/body "tools"))
-
-  (defhydra mari:menu-file (:color blue)
-    "file"
-    ("f" find-file "find")
-    ("s" save-buffer "save")
-    ("r" mari:rename-current-file "rename")
-    ("d" mari:delete-current-file "delete"))
-
-  (defhydra mari:menu-window (:color blue)
-    "window"
-    ("w" ace-window "jump")
-    ("l" mari:split-window-horizontally "new h")
-    ("j" mari:split-window-vertically "new v")
-    ("r" mari:menu-window-resize/body "resize")
-    ("d" delete-window "delete"))
-
-  (defhydra mari:menu-window-resize (:color amaranth)
-    "window resize"
-    ("k" (mari:window-resize 'up) "Up")
-    ("j" (mari:window-resize 'down) "Down")
-    ("h" (mari:window-resize 'left) "Left")
-    ("l" (mari:window-resize 'right) "Right")
-    ("q" nil "quit"))
-
-  (defhydra mari:menu-project (:color blue)
-    "project"
-    ("f" project-find-file "find file")
-    ("p" project-switch-project "switch")
-    ("g" project-find-regexp "search")
-    ("k" project-kill-buffers "close"))
-
-  (defhydra mari:menu-tools (:color blue)
-    "tools"
-    ("c" execute-extended-command "command")
-    ("t" shell-pop "term")
-    ("g" magit "git")
-    ("d" (dired nil) "dired")
-    ("m" mu4e "mail"))
-
-  (global-set-key (kbd "<muhenkan>") 'mari:menu-index/body)
-  (global-set-key (kbd "<f1>") 'mari:menu-index/body))
+(mari:defkey "C-c f r" #'mari:rename-current-file)
+(mari:defkey "C-c f d" #'mari:delete-current-file)
+(mari:defkey "C-c t t" #'shell-pop)
+(mari:defkey "C-x 2" (mari:com () (split-window-below) (other-window 1)))
+(mari:defkey "C-x 3" (mari:com () (split-window-right) (other-window 1)))
 
 (provide 'mari-binding)
 
