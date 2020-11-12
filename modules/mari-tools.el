@@ -36,6 +36,8 @@
 
 (use-package elfeed)
 
+(use-package w3m)
+
 (provide 'mari-tools)
 
 ;;; mari-tools.el ends here
