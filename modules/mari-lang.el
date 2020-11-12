@@ -99,9 +99,19 @@
   :straight (slime :type git :host github :repo "nattakit-h/slime")
   :custom
   (inferior-lisp-program "eql5")
+  (slime-contribs '(slime-fancy slime-company))
   (slime-repl-history-file (concat mari:runtime-directory "slime-history.eld"))
   :config
-  (load (concat (mari:get-xdg-data-home) "quicklisp/clhs-use-local.el") t t))
+  (load (concat (mari:get-xdg-data-home) "quicklisp/clhs-use-local.el") t t)
+  :hook
+  (lisp-mode . mari:eql-slime))
+
+(use-package slime-company
+  :after (slime company)
+  :custom
+  (slime-company-completion 'fuzzy))
+
+(slime-setup)
 
 (provide 'mari-lang)
 
