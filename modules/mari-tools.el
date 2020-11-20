@@ -38,6 +38,10 @@
 
 (use-package w3m)
 
+(use-package ctrlf
+  :config
+  (ctrlf-mode 1))
+
 (provide 'mari-tools)
 
 ;;; mari-tools.el ends here
