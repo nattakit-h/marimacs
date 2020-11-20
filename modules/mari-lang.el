@@ -29,32 +29,6 @@
   (clang-format+-always-enable t)
   :hook ((c-mode c++-mode) . clang-format+-mode))
 
-(use-package tsc
-  :straight (tsc
-             :type git
-             :host github
-             :repo "ubolonton/emacs-tree-sitter"
-             :files ("core/*.el")))
-
-(use-package tree-sitter
-  :after tsc
-  :straight (tree-sitter
-             :type git
-             :host github
-             :repo "ubolonton/emacs-tree-sitter"
-             :files ("lisp/*.el"))
-  :hook
-  ((c-mode c++mode) . tree-sitter-mode)
-  ((c-mode c++-mode) . tree-sitter-hl-mode))
-
-(use-package tree-sitter-langs
-  :after tree-sitter
-  :straight (tree-sitter-langs
-             :type git
-             :host github
-             :repo "ubolonton/emacs-tree-sitter"
-             :files ("langs/*.el" "langs/queries")))
-
 (use-package ccls
   :custom
   (ccls-sem-highlight-method 'overlay)
