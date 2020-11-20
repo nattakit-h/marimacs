@@ -36,8 +36,6 @@
    '(:index (:comments 2 :onChange t) :completion
             (:detailedLabel t) :cache (:directory ""))))
 
-(use-package arduino-mode)
-
 (use-package json-mode)
 
 (use-package yaml-mode
