@@ -24,9 +24,18 @@
 
 ;;; Code:
 
-(defmacro mari:defkey (key func)
-  "Bind KEY to FUNC for evil normal map."
-  `(define-key evil-normal-state-map (kbd ,key) ,func))
+(use-package avy)
+
+(use-package ace-window
+  :custom
+  (aw-ignore-current t)
+  (aw-scope 'frame)
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
+(defmacro mari:defkey (key func &optional map)
+  "Bind KEY to FUNC in MAP."
+  (let ((keymap (or map 'evil-normal-state-map)))
+    `(define-key ,keymap (kbd ,key) ,func)))
 
 (defmacro mari:com (args &rest body)
   "Alias for interactive command with ARGS and BODY."
@@ -39,6 +48,11 @@
 (mari:defkey "C-c t t" #'shell-pop)
 (mari:defkey "C-x 2" (mari:com () (split-window-below) (other-window 1)))
 (mari:defkey "C-x 3" (mari:com () (split-window-right) (other-window 1)))
+(mari:defkey "C-j" #'next-line selectrum-minibuffer-map)
+(mari:defkey "C-k" #'previous-line selectrum-minibuffer-map)
+(mari:defkey "C-;" #'avy-goto-char-timer)
+(mari:defkey "C-." #'avy-goto-word-1)
+(mari:defkey "C-x o" #'ace-window global-map)
 
 (provide 'mari-binding)
 
