@@ -35,6 +35,7 @@
   (evil-want-integration t)
   (evil-want-keybinding nil)
   (evil-want-C-u-scroll t)
+  (evil-undo-system 'undo-redo)
   :hook
   (after-init . (lambda () (evil-mode 1))))
 
