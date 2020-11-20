@@ -67,10 +67,14 @@
   :hook
   (org-mode . org-bullets-mode))
 
+(use-package geiser
+  :custom
+  (geiser-active-implementations '(racket)))
+
 (use-package slime
   :straight (slime :type git :host github :repo "nattakit-h/slime")
   :custom
-  (inferior-lisp-program "eql5")
+  (inferior-lisp-program "ecl")
   (slime-contribs '(slime-fancy slime-company))
   (slime-repl-history-file (concat mari:runtime-directory "slime-history.eld"))
   :config
