@@ -24,13 +24,22 @@
 
 ;;; Code:
 
+(use-package prescient
+  :config
+  (prescient-persist-mode))
+
 (use-package selectrum
   :config
   (selectrum-mode))
 
+(use-package selectrum-prescient
+  :after prescient selectrum
+  :config
+  (selectrum-prescient-mode))
+
 (use-package company
   :custom
-  (company-idle-delay 0)
+  (company-idle-delay 0.3)
   (company-selection-wrap-around t)
   (company-tooltip-align-annotations t)
   :hook
