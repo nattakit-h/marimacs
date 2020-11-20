@@ -110,6 +110,11 @@
   :config
   (dashboard-setup-startup-hook))
 
+
+(use-package page-break-lines
+  :hook
+  ((help-mode prog-mode special-mode compilation-mode) . page-break-lines-mode))
+
 (provide 'mari-appearance)
 
 ;;; mari-appearance.el ends here
