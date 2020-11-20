@@ -24,9 +24,7 @@
 
 ;;; Code:
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Interactive functions
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun mari:split-window-horizontally ()
   "Split window horizontally then shift focus to new windows."
@@ -113,9 +111,23 @@
     ;; HACK: Waiting for pop up window
     (run-at-time 0.1 nil (lambda () (shrink-window 15) (other-window 1)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun mari:open-with-mpv ()
+  "Open file or url with mpv."
+  (interactive)
+  (defun play (this)
+    (message (format "mpv %s" this))
+    (set-process-sentinel
+     (start-process-shell-command "mpv" nil (format "mpv --ytdl-format=18 %s" this))
+     (lambda (pid status)
+       (unless (string= status "finished\n") (message "mpv error")))))
+  (let ((url (thing-at-point 'url))
+        (file (thing-at-point 'filename)))
+    (cond (url (play url))
+          ((file-exists-p file) (play file)))))
+
+
+
 ;; Non-interactive functions
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun mari:with-fa-icon (icon str &optional height v-adjust)
   "Get font awesome icon named ICON with specified HEIGHT and V-ADJUST \
