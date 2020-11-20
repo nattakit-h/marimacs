@@ -94,9 +94,17 @@
                    (concat user-emacs-directory
                            "straight/repos/slime/eql-start-swank.lisp"))))
 
+(defun mari:ecl-slime ()
+  "Start and connect to swank with ecl."
+  (interactive)
+  (setq inferior-lisp-program "ecl")
+  (slime)
+  (run-at-time 0.1 nil (lambda () (shrink-window 15) (other-window 1))))
+
 (defun mari:eql-slime ()
   "Start and connect to swank with eql5."
   (interactive)
+  (setq inferior-lisp-program "eql5")
   (unless (get-buffer "*slime-repl ECL*")
     (mari:eql-start-swank)
     (with-timeout (1 (message "Unable to connect to eql-swank process"))
@@ -150,7 +158,7 @@ and append it wtih STR."
   "Get user XDG data home directory."
   (file-name-as-directory
    (or (getenv "XDG_DATA_HOME")
-       (concat (file-name-as-directory (getenv "HOME")) ".local/share"))))
+       (expand-file-name "share" (expand-file-name ".local" (getenv "HOME"))))))
 
 (provide 'mari-func)
 

@@ -26,22 +26,19 @@
 
 ;; Set standard paths
 (defconst mari:modules-directory
-  (file-name-as-directory (concat user-emacs-directory "modules")))
+  (expand-file-name "modules" user-emacs-directory))
 
 (defconst mari:runtime-directory
-  (file-name-as-directory (concat user-emacs-directory "runtime")))
+  (expand-file-name "runtime" user-emacs-directory))
 
 (defconst mari:data-directory
-  (file-name-as-directory (concat user-emacs-directory "data")))
+  (expand-file-name "data" user-emacs-directory))
 
 ;; Set eln cache directory
 (when (featurep 'nativecomp)
   (setq comp-eln-load-path
-        (cons (file-name-as-directory (concat mari:runtime-directory "eln"))
+        (cons (expand-file-name "eln" mari:runtime-directory)
               (remq (car comp-eln-load-path) comp-eln-load-path))))
-
-;; Increase gc threshold for lsp-mode
-(setq gc-cons-threshold 100000000)
 
 ;; Disabled auto save
 (setq auto-save-default nil)
@@ -55,6 +52,12 @@
 (setq initial-scratch-message nil)
 (defalias 'display-startup-echo-area-message 'ignore)
 
+;; Disable dialog box
+(setq use-dialog-box nil)
+
+;; Disable native tooltips
+(setq x-gtk-use-system-tooltips nil)
+
 ;; Set titlebar
 (setq frame-title-format "marimacs")
 
@@ -67,6 +70,9 @@
 ;; Disable line wrapping
 (add-hook 'hack-local-variables-hook
           (lambda () (setq truncate-lines t)))
+
+;; Don't save custom file
+(setq custom-file null-device)
 
 ;; Turn yes-or-no to y-or-n
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -92,5 +98,11 @@
 
 ;; Kill all remaining processes when emacs exited
 (setq confirm-kill-processes nil)
+
+;; Enable so long mode
+(global-so-long-mode 1)
+
+;; Disable downcase-region
+(put 'downcase-region 'disabled nil)
 
 ;;; early-init.el ends here

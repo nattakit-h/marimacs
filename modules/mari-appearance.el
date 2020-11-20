@@ -98,8 +98,8 @@
 (use-package dashboard
   :after all-the-icons
   :custom
-  (dashboard-startup-banner (concat (file-name-directory user-emacs-directory) "emacs.png"))
   (dashboard-banner-logo-title "M A R I M A C S")
+  (dashboard-startup-banner (expand-file-name "emacs.png" user-emacs-directory))
   (dashboard-items '())
   (dashboard-set-navigator t)
   (dashboard-show-shortcuts nil)
