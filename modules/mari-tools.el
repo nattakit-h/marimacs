@@ -36,7 +36,9 @@
 
 (use-package elfeed)
 
-(use-package w3m)
+(use-package w3m
+  :custom
+  (w3m-use-cookie nil))
 
 (use-package ctrlf
   :config
