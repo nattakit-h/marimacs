@@ -34,8 +34,6 @@
 (require 'mari-lsp)
 (require 'mari-lang)
 (require 'mari-tools)
-(require 'mari-mail)
-(require 'mari-mail-config)
 (require 'mari-binding)
 
 ;;; init.el ends here
