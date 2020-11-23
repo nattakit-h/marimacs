@@ -75,7 +75,9 @@
   (set-face-foreground 'racket-debug-locals-face (face-foreground 'font-lock-type-face))
   (set-face-foreground 'racket-debug-result-face (face-foreground 'font-lock-string-face))
   (set-face-foreground 'racket-selfeval-face (face-foreground 'font-lock-constant-face))
-  (set-face-foreground 'racket-keyword-argument-face (face-foreground 'font-lock-builtin-face)))
+  (set-face-foreground 'racket-keyword-argument-face (face-foreground 'font-lock-builtin-face))
+  :hook
+  (racket-mode . racket-xp-mode))
 
 (use-package slime
   :straight (slime :type git :host github :repo "nattakit-h/slime")
