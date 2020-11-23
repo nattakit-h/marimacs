@@ -67,18 +67,14 @@
   :hook
   (org-mode . org-bullets-mode))
 
-(use-package geiser
-  :custom
-  (geiser-active-implementations '(racket)))
-
 (use-package slime
   :straight (slime :type git :host github :repo "nattakit-h/slime")
   :custom
   (inferior-lisp-program "ecl")
   (slime-contribs '(slime-fancy slime-company))
-  (slime-repl-history-file (concat mari:runtime-directory "slime-history.eld"))
+  (slime-repl-history-file (expand-file-name "slime-history.eld" mari:runtime-directory))
   :config
-  (load (concat (mari:get-xdg-data-home) "quicklisp/clhs-use-local.el") t t)
+  (load (expand-file-name "quicklisp/clhs-use-local.el" (mari:get-xdg-data-home)) t t)
   :hook
   (lisp-mode . mari:eql-slime))
 
