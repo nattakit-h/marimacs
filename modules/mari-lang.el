@@ -67,6 +67,16 @@
   :hook
   (org-mode . org-bullets-mode))
 
+(use-package racket-mode
+  :custom
+  (racket-show-functions '(racket-show-pos-tip))
+  :config
+  (set-face-attribute 'racket-xp-unused-face nil :strike-through nil)
+  (set-face-foreground 'racket-debug-locals-face (face-foreground 'font-lock-type-face))
+  (set-face-foreground 'racket-debug-result-face (face-foreground 'font-lock-string-face))
+  (set-face-foreground 'racket-selfeval-face (face-foreground 'font-lock-constant-face))
+  (set-face-foreground 'racket-keyword-argument-face (face-foreground 'font-lock-builtin-face)))
+
 (use-package slime
   :straight (slime :type git :host github :repo "nattakit-h/slime")
   :custom
